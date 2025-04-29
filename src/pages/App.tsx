@@ -3,6 +3,7 @@ import Menu from '../components/Menu';
 import Autenticacao from '../pages/Autenticacao';
 import RotaPrivada from '../components/RotaPrivada';
 import CadastroVeiculo from './Veiculo/CadastroVeiculo';
+import ListaVeiculos from './Veiculo/ListarVericulos';
 import CadastroMarca from './Marca/CadastroMarca';
 import ListaMarcas from './Marca/ListarMarcas';
 
@@ -24,7 +25,25 @@ export default function App() {
             </RotaPrivada>
           } />
 
+          <Route path='/veiculos/cadastro/:id' element={
+            <RotaPrivada>
+              <CadastroVeiculo />
+            </RotaPrivada>
+          } />
+
+          <Route path="/veiculos" element={
+            <RotaPrivada>
+              <ListaVeiculos />
+            </RotaPrivada>
+          } />
+
           <Route path="/marcas/cadastro" element={
+            <RotaPrivada>
+              <CadastroMarca />
+            </RotaPrivada>
+          } />
+
+          <Route path='/marcas/cadastro/:id' element={
             <RotaPrivada>
               <CadastroMarca />
             </RotaPrivada>

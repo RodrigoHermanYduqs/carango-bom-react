@@ -20,3 +20,12 @@ export async function cadastrarVeiculo(veiculo: Veiculo): Promise<void> {
       }
     });
 }
+
+export async function modificarVeiculo(veiculo: Veiculo): Promise<void> {
+  await api.put(`/veiculos/${veiculo.id}/`, veiculo,
+    {
+      headers: {
+        Authorization: `Bearer ${getTokenAcesso()}`
+      }
+    });
+}

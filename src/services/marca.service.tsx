@@ -20,3 +20,22 @@ export async function cadastrarMarca(marca: Marca): Promise<void> {
       }
     });
 }
+
+export async function modificarMarca(marca: Marca): Promise<void> {
+  await api.put(`/marcas/${marca.id}/`, marca,
+    {
+      headers: {
+        Authorization: `Bearer ${getTokenAcesso()}`
+      }
+    });
+}
+
+export async function excluirMarca(marcaExcluida: Marca): Promise<void> {
+  await api.delete(`/marcas/${marcaExcluida.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getTokenAcesso()}`
+      }
+    }
+  )
+}
