@@ -4,6 +4,7 @@ export type CampoFormulario<T> = {
     label: string;
     placeholder?: string;
     required?: boolean;
+    readOnly?: boolean;
   };
   
 export type PropsFormulario<T> = {

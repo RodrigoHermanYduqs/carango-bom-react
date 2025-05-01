@@ -11,9 +11,19 @@ export async function listarMarcas(): Promise<Marca[]> {
     });
   return response.data;
 }
+
+export async function listarUmaMarca(id: string): Promise<Marca> {
+  const response = await api.get(`marcas/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getTokenAcesso()}`
+      }
+    });
+  return response.data;
+}
   
 export async function cadastrarMarca(marca: Marca): Promise<void> {
-  await api.post('/marcas', marca,
+  await api.post('marcas', {nome: marca.nome},
     {
       headers: {
         Authorization: `Bearer ${getTokenAcesso()}`
@@ -22,7 +32,7 @@ export async function cadastrarMarca(marca: Marca): Promise<void> {
 }
 
 export async function modificarMarca(marca: Marca): Promise<void> {
-  await api.put(`/marcas/${marca.id}/`, marca,
+  await api.put(`marcas/${marca.id}/`, {nome: marca.nome},
     {
       headers: {
         Authorization: `Bearer ${getTokenAcesso()}`
@@ -31,7 +41,7 @@ export async function modificarMarca(marca: Marca): Promise<void> {
 }
 
 export async function excluirMarca(marcaExcluida: Marca): Promise<void> {
-  await api.delete(`/marcas/${marcaExcluida.id}`,
+  await api.delete(`marcas/${marcaExcluida.id}`,
     {
       headers: {
         Authorization: `Bearer ${getTokenAcesso()}`

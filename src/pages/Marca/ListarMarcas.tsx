@@ -13,7 +13,6 @@ export default function ListaMarcas() {
     async function carregarMarcas() {
       try {
         const response = await listarMarcas();
-        //console.log(response);
         setMarcas(response);
       } catch (error) {
         alert('Erro ao carregar marcas');
@@ -32,7 +31,7 @@ export default function ListaMarcas() {
       setMarcas([...listaMarcas]);
     }
     catch (err) {
-      alert('Erro ao excluir marca');
+      alert('Marca não pode ser excluída. Já existe um veículo associado.');
     }
   }
 
@@ -40,9 +39,10 @@ export default function ListaMarcas() {
     <div className={style.listaMarcas}>
       <h1>Lista de Marcas</h1>
       {marcas.length > 0 ? (
-        <table>
+        <table >
           <thead>
             <tr>
+              <th>ID</th>
               <th>Marca</th>
               <th></th>
             </tr>
@@ -50,8 +50,11 @@ export default function ListaMarcas() {
           <tbody>
             {marcas.map((marcas: any) => (
               <tr key={marcas.id}>
-                <td>{marcas.nome}</td>
-                <td>
+                <td style={{ textAlign: 'left', width: '40%' }}>
+                  <Link className='App-link' to={`/marcas/cadastro/${marcas.id}`}>{marcas.id}</Link>
+                </td>
+                <td style={{ textAlign: 'left', width: '40%' }}>{marcas.nome}</td>
+                <td style={{ textAlign: 'center', width: '20%' }}>
                   <button className='botao' onClick={() => excluir(marcas)}>{'< Excluir >'}</button>
                 </td>
               </tr>
@@ -60,7 +63,8 @@ export default function ListaMarcas() {
         </table>
       ) : (
         <p className={style.emptyState}>Nenhuma marca cadastrada.</p>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }

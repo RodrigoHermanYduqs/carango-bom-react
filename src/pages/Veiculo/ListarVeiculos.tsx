@@ -9,7 +9,7 @@ import { listarMarcas } from '../../services/marca.service';
 
 export default function ListaVeiculos() {
   const [veiculos, setVeiculos] = useRecoilState(listaVeiculoAtom);
-  //const [marcas, setMarcas] = useRecoilState(listaMarcaAtom);
+  const [marcas, setMarcas] = useRecoilState(listaMarcaAtom);
 
   useEffect(() => {
     async function carregarVeiculos() {
@@ -21,22 +21,22 @@ export default function ListaVeiculos() {
         console.error(error);
       }
     }
-    /*
-        async function carregarMarcas() {
-          try {
-            const respMarca = await listarMarcas();
-            setMarcas(respMarca);
-          } catch (error) {
-            alert('Erro ao carregar marcas');
-            console.error(error);
-          }
-        }*/
+
+    async function carregarMarcas() {
+      try {
+        const respMarca = await listarMarcas();
+        setMarcas(respMarca);
+      } catch (error) {
+        alert('Erro ao carregar marcas');
+        console.error(error);
+      }
+    }
 
     carregarVeiculos();
-    //carregarMarcas();
+    carregarMarcas();
 
-  //}, [setVeiculos, setMarcas]);
-  }, [setVeiculos]);
+  }, [setVeiculos, setMarcas]);
+  //}, [setVeiculos]);
 
   async function excluir(veiculoExcluido: Veiculo) {
     try {
@@ -50,8 +50,8 @@ export default function ListaVeiculos() {
   }
 
   function buscarNomeMarca(idProcurado: string): string | undefined {
-    /*const marcaEncontrada = marcas.find(marca => marca.id === idProcurado);
-    return marcaEncontrada?.nome;*/
+    const marcaEncontrada = marcas.find(marca => marca.id === idProcurado);
+    return marcaEncontrada?.nome;
     return '';
   }
 

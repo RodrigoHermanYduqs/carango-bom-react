@@ -28,6 +28,7 @@ export default function FormularioBase<T>({
             value={valores[campo.nome] as string}
             onChange={handleChange(campo.nome)}
             required={campo.required}
+            readOnly={campo.readOnly}
           />
         </div>
       ))}

@@ -1,3 +1,14 @@
+.App-link {
+  color: #61dafb;
+}
+
+.botao {
+  background-color: transparent;
+  border: none;
+  color: #61dafb;
+  cursor: pointer;
+}
+
 .listaMarcas {
     display: flex;
     flex-direction: column;
@@ -14,13 +25,6 @@
       text-align: center;
     }
 
-    botao {
-      background-color: transparent;
-      border: none;
-      color: #61dafb;
-      cursor: pointer;
-    }
-  
     table {
       width: 100%;
       border-collapse: collapse;
