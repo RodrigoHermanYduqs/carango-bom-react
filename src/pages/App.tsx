@@ -6,6 +6,7 @@ import CadastroVeiculo from './Veiculo/CadastroVeiculo';
 import ListaVeiculos from './Veiculo/ListarVeiculos';
 import CadastroMarca from './Marca/CadastroMarca';
 import ListaMarcas from './Marca/ListarMarcas';
+import Home from './Home';
 
 export default function App() {
   return (
@@ -18,6 +19,12 @@ export default function App() {
         </div>
         <Routes>
           <Route path='/' element={<Autenticacao />} />
+
+          <Route path="/home" element={
+            <RotaPrivada>
+              <Home />
+            </RotaPrivada>
+          } />
 
           <Route path="/veiculos/cadastro" element={
             <RotaPrivada>
@@ -54,7 +61,7 @@ export default function App() {
               <ListaMarcas />
             </RotaPrivada>
           } />
-          <Route path="*" element={<Autenticacao />} /> {}
+          <Route path="*" element={<Autenticacao />} /> { }
         </Routes>
       </div>
     </Router>

@@ -15,10 +15,13 @@ export default function Menu() {
     <nav className={styles.menu}>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Novo Login</Link>
         </li>
         {estaAutenticado && (
           <>
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
             <li>
               <Link to="/veiculos/cadastro">Cadastrar Veículos</Link>
             </li>

@@ -21,7 +21,7 @@ export default function Autenticacao() {
       const sucesso = await login(autenticacao);
 
       if (sucesso) {
-        navigate('/usuarios');
+        navigate('home');
       } else {
         alert('Token inválido!');
         navigate('/');
