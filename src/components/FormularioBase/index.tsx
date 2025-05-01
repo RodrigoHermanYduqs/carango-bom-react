@@ -15,11 +15,6 @@ export default function FormularioBase<T>({
       setValores({ ...valores, [campo]: evento.target.value });
     };
 
-  const handleChangeSelect = (campo: keyof T) =>
-    (evento: React.ChangeEvent<HTMLSelectElement>) => {
-      setValores({ ...valores, [campo]: evento.target.value });
-    };
-
   return (
     <form className={style.novoFormularioBase} onSubmit={onSubmit}>
       {campos.map((campo) => (

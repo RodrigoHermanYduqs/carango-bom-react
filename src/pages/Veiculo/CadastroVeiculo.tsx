@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import FormularioBase from '../../components/FormularioBase';
+import FormularioBase from '../../components/FormularioBase/FormularioVeiculos';
 import { Veiculo } from '../../types/veiculo.type';
 import { CampoFormulario } from '../../types/formularioBase.type';
 import { useRecoilState } from 'recoil';
 import { veiculoAtom } from '../../atoms/veiculoAtom';
-import { marcaAtom } from '../../atoms/marcaAtom';
 import { cadastrarVeiculo, listarUmVeiculo, modificarVeiculo } from '../../services/veiculo.service';
 import { useNavigate, useParams } from 'react-router-dom';
+import { listarMarcas } from '../../services/marca.service';
+import { listaMarcaAtom } from '../../atoms/listaMarcaAtom';
 
 
 const campos = [
-  { nome: 'id', tipo: 'text', label: 'id', placeholder: '', required: false, readonly: true },
-  { nome: 'marcaId', tipo: 'text', label: 'Marca', placeholder: '', required: true },
+  { nome: 'id', tipo: 'text', label: 'id', placeholder: 'ID', required: false, readOnly: true },
+  { nome: 'marcaId', tipo: 'select', label: 'Marca', placeholder: '', required: true },
   { nome: 'modelo', tipo: 'text', label: 'Modelo', placeholder: 'modelo do veículo', required: true },
   { nome: 'valor', tipo: 'text', label: 'Valor', required: true },
   { nome: 'ano', tipo: 'text', label: 'Ano', placeholder: 'Ano do Veículo', required: true },
@@ -21,7 +22,7 @@ export default function CadastroVeiculo() {
   const navegar = useNavigate();
   const parametros = useParams();
   const [veiculo, setVeiculo] = useRecoilState(veiculoAtom);
-  //const [marcas, setMarcas] = useRecoilState(marcaAtom);
+  const [marcas, setMarcas] = useRecoilState(listaMarcaAtom);
 
 
   useEffect(() => {
@@ -39,17 +40,33 @@ export default function CadastroVeiculo() {
           });
 
         }
+        else{
+          limparForm();
+        }
       } catch (error) {
         alert('Marca não encontrada para alteração.');
         console.error(error);
       }
     };
 
+    const carregarMarcas = async () => {
+      try {
+        const responseMarcas = await listarMarcas();
+        setMarcas(responseMarcas);
+
+      } catch (error) {
+        alert('Erro ao carregar marcas');
+        console.error(error);
+      }
+    };
+
     carregarVeiculo();
+    carregarMarcas();
   }, [parametros]);
 
   const handleSubmit = async (evento: React.FormEvent) => {
     evento.preventDefault();
+
     try {
       if (!veiculo.id) {
         await cadastrarVeiculo(veiculo);
@@ -59,17 +76,23 @@ export default function CadastroVeiculo() {
         await modificarVeiculo(veiculo);
         alert('Veículo modificado!');
       }
-      setVeiculo({ 
-        id: '', 
-        modelo: '', 
-        ano: 0, 
-        valor: 0, 
-        marcaId: '' 
-      });
+
+      limparForm();
+
       navegar('/veiculos');
     } catch (err) {
       alert('Erro ao cadastrar veículo');
     }
+  };
+
+  const limparForm = () => {
+    setVeiculo({ 
+      id: '', 
+      modelo: '', 
+      ano: 0, 
+      valor: 0, 
+      marcaId: '' 
+    });
   };
 
   return (

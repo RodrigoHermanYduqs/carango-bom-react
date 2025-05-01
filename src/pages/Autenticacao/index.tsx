@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FormularioBase from '../../components/FormularioBase';
+import FormularioBase from '../../components/FormularioBase/';
 import { CampoFormulario } from '../../types/formularioBase.type';
 import type { Autenticacao } from '../../types/autenticacao.type';
 import { useNavigate } from 'react-router-dom';

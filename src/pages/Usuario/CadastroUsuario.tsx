@@ -1,5 +1,5 @@
 import React from 'react';
-import FormularioBase from '../../components/FormularioBase';
+import FormularioBase from '../../components/FormularioBase/';
 import { Usuario } from '../../types/usuario.type';
 import { CampoFormulario } from '../../types/formularioBase.type';
 import { cadastrarUsuario } from '../../services/usuario.service';

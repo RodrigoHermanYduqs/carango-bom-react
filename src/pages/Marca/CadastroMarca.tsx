@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import FormularioBase from '../../components/FormularioBase';
+import FormularioBase from '../../components/FormularioBase/';
 import { CampoFormulario } from '../../types/formularioBase.type';
 import { useRecoilState } from 'recoil';
 import { cadastrarMarca, modificarMarca, listarUmaMarca } from '../../services/marca.service';
@@ -24,12 +24,14 @@ export default function CadastroMarca() {
       try {
         if (parametros.id) {
           const response = await listarUmaMarca(parametros.id);
-          //setMarca(response);
           setMarca({
             id: response.id,
             nome: response.nome
           });
 
+        }
+        else{
+          limparForm();
         }
       } catch (error) {
         alert('Marca não encontrada para alteração.');
@@ -54,15 +56,19 @@ export default function CadastroMarca() {
         alert('Marca atualizada!');
       }
 
-      setMarca({
-        id: '',
-        nome: ''
-      });
+      limparForm();
 
       navegar('/marcas');
     } catch (err) {
       alert('Erro ao cadastrar marca');
     }
+  };
+
+  const limparForm = () =>{
+    setMarca({
+      id: '',
+      nome: ''
+    });
   };
 
   return (
