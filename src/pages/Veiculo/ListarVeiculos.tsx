@@ -6,6 +6,7 @@ import { excluirVeiculo, listarVeiculos } from '../../services/veiculo.service';
 import { Veiculo } from '../../types/veiculo.type';
 import { listaMarcaAtom } from '../../atoms/listaMarcaAtom';
 import { listarMarcas } from '../../services/marca.service';
+import { Link } from 'react-router-dom';
 
 export default function ListaVeiculos() {
   const [veiculos, setVeiculos] = useRecoilState(listaVeiculoAtom);
@@ -36,7 +37,6 @@ export default function ListaVeiculos() {
     carregarMarcas();
 
   }, [setVeiculos, setMarcas]);
-  //}, [setVeiculos]);
 
   async function excluir(veiculoExcluido: Veiculo) {
     try {
@@ -52,7 +52,6 @@ export default function ListaVeiculos() {
   function buscarNomeMarca(idProcurado: string): string | undefined {
     const marcaEncontrada = marcas.find(marca => marca.id === idProcurado);
     return marcaEncontrada?.nome;
-    return '';
   }
 
   return (
@@ -62,6 +61,7 @@ export default function ListaVeiculos() {
         <table>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Marca</th>
               <th>Modelo</th>
               <th>Ano</th>
@@ -72,6 +72,9 @@ export default function ListaVeiculos() {
           <tbody>
             {veiculos.map((veiculos: any) => (
               <tr key={veiculos.id}>
+                <td style={{ textAlign: 'left', width: '40%' }}>
+                  <Link className='App-link' to={`/veiculos/cadastro/${veiculos.id}`}>{veiculos.id}</Link>
+                </td>
                 <td>{buscarNomeMarca(veiculos.marcaId)}</td>
                 <td>{veiculos.modelo}</td>
                 <td>{veiculos.ano}</td>

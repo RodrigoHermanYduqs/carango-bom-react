@@ -1,7 +1,7 @@
 export type Veiculo = {
     id: string; 
     modelo: string;
-    ano: string;
     valor: number;
+    ano: number;
     marcaId: string;
   };

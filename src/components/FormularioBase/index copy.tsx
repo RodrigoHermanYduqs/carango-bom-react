@@ -3,7 +3,7 @@ import style from './FormularioBase.module.scss';
 import Botao from '../Botao';
 import { PropsFormulario } from '../../types/formularioBase.type';
 
-export default function FormularioBase<T>({
+export default function FormularioBase_copy<T>({
   campos,
   valores,
   setValores,
@@ -12,11 +12,6 @@ export default function FormularioBase<T>({
 }: PropsFormulario<T>) {
   const handleChange = (campo: keyof T) =>
     (evento: React.ChangeEvent<HTMLInputElement>) => {
-      setValores({ ...valores, [campo]: evento.target.value });
-    };
-
-  const handleChangeSelect = (campo: keyof T) =>
-    (evento: React.ChangeEvent<HTMLSelectElement>) => {
       setValores({ ...valores, [campo]: evento.target.value });
     };
 

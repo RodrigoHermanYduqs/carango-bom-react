@@ -6,7 +6,7 @@ export const veiculoAtom = atom<Veiculo>({
   default: {
     id: '',
     modelo: '',
-    ano: '',
+    ano: 0,
     valor: 0,
     marcaId: '',
   },
