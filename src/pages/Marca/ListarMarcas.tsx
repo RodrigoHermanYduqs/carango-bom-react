@@ -7,13 +7,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Marca } from '../../types/marca.type';
 
 export default function ListaMarcas() {
-  const navigate = useNavigate();
   const [marcas, setMarcas] = useRecoilState(listaMarcaAtom);
 
   useEffect(() => {
     async function carregarMarcas() {
       try {
         const response = await listarMarcas();
+        //console.log(response);
         setMarcas(response);
       } catch (error) {
         alert('Erro ao carregar marcas');
@@ -22,17 +22,18 @@ export default function ListaMarcas() {
     }
 
     carregarMarcas();
+
   }, [setMarcas]);
 
   async function excluir(marcaExcluida: Marca) {
-      try{
-        const response = await excluirMarca(marcaExcluida);
-        const listaMarcas = marcas.filter(marcas => marcas.id !== marcaExcluida.id)
-              setMarcas([...listaMarcas])
-      }
-      catch (err) {
-        alert('Erro ao excluir marca');
-      }
+    try {
+      const response = await excluirMarca(marcaExcluida);
+      const listaMarcas = marcas.filter(marcas => marcas.id !== marcaExcluida.id);
+      setMarcas([...listaMarcas]);
+    }
+    catch (err) {
+      alert('Erro ao excluir marca');
+    }
   }
 
   return (
@@ -42,7 +43,8 @@ export default function ListaMarcas() {
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
+              <th>Marca</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

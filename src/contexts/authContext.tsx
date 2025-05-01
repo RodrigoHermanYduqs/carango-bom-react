@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (dados: Autenticacao): Promise<boolean> => {
     try {
+      
       const { token_acesso, id_usuario } = await realizarLogin(dados);
       if (token_acesso) {
         setTokenAcesso(token_acesso, id_usuario);

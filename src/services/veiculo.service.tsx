@@ -3,7 +3,7 @@ import { Veiculo } from '../types/veiculo.type';
 import { getTokenAcesso } from '../utils/tokenAcesso';
 
 export async function listarVeiculos(): Promise<Veiculo[]> {
-  const response = await api.get('/veiculos',
+  const response = await api.get('veiculos',
     {
       headers: {
         Authorization: `Bearer ${getTokenAcesso()}`
@@ -28,4 +28,14 @@ export async function modificarVeiculo(veiculo: Veiculo): Promise<void> {
         Authorization: `Bearer ${getTokenAcesso()}`
       }
     });
+}
+
+export async function excluirVeiculo(veiculoExcluido: Veiculo): Promise<void> {
+  await api.delete(`/marcas/${veiculoExcluido.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getTokenAcesso()}`
+      }
+    }
+  );
 }

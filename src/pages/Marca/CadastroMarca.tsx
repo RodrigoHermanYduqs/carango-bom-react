@@ -6,8 +6,10 @@ import { cadastrarMarca, modificarMarca } from '../../services/marca.service';
 import { marcaAtom } from '../../atoms/marcaAtom';
 import { Marca } from '../../types/marca.type';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getByPlaceholderText } from '@testing-library/dom';
 
 const campos = [
+  { id: 'id', tipo: 'hidden', label: 'id', placeholder: '', required: false},
   { nome: 'nome', tipo: 'text', label: 'nome', placeholder: 'Digite a Marca', required: true },
 ];
 
@@ -16,7 +18,7 @@ export default function CadastroMarca() {
   const [marca, setMarca] = useRecoilState(marcaAtom);
 
   const handleSubmit = async (evento: React.FormEvent) => {
-    
+
     evento.preventDefault();
     try {
       if (!parametros.id){

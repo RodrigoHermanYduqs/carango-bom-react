@@ -3,7 +3,7 @@ import Menu from '../components/Menu';
 import Autenticacao from '../pages/Autenticacao';
 import RotaPrivada from '../components/RotaPrivada';
 import CadastroVeiculo from './Veiculo/CadastroVeiculo';
-import ListaVeiculos from './Veiculo/ListarVericulos';
+import ListaVeiculos from './Veiculo/ListarVeiculos';
 import CadastroMarca from './Marca/CadastroMarca';
 import ListaMarcas from './Marca/ListarMarcas';
 

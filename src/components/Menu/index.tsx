@@ -29,7 +29,7 @@ export default function Menu() {
               <Link to="/marcas/cadastro">Cadastrar Marcas</Link>
             </li>
             <li>
-              <Link to="/marca">Lista de Marcas</Link>
+              <Link to="/marcas">Lista de Marcas</Link>
             </li>
             <li>
               <button onClick={handleLogout} className={styles.logoutButton}>

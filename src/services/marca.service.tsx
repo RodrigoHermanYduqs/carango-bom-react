@@ -3,7 +3,7 @@ import { Marca } from '../types/marca.type';
 import { getTokenAcesso } from '../utils/tokenAcesso';
 
 export async function listarMarcas(): Promise<Marca[]> {
-  const response = await api.get('/marcas',
+  const response = await api.get('marcas',
     {
       headers: {
         Authorization: `Bearer ${getTokenAcesso()}`
@@ -37,5 +37,5 @@ export async function excluirMarca(marcaExcluida: Marca): Promise<void> {
         Authorization: `Bearer ${getTokenAcesso()}`
       }
     }
-  )
+  );
 }
