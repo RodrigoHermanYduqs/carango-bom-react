@@ -28,7 +28,9 @@ export async function cadastrarMarca(marca: Marca): Promise<void> {
       headers: {
         Authorization: `Bearer ${getTokenAcesso()}`
       }
-    });
+    }).catch(error => {
+    throw new Error(error.response.data.message);
+  });
 }
 
 export async function modificarMarca(marca: Marca): Promise<void> {
@@ -37,7 +39,9 @@ export async function modificarMarca(marca: Marca): Promise<void> {
       headers: {
         Authorization: `Bearer ${getTokenAcesso()}`
       }
-    });
+    }).catch(error => {
+    throw new Error(error.response.data.message);
+  });
 }
 
 export async function excluirMarca(marcaExcluida: Marca): Promise<void> {
@@ -47,5 +51,7 @@ export async function excluirMarca(marcaExcluida: Marca): Promise<void> {
         Authorization: `Bearer ${getTokenAcesso()}`
       }
     }
-  );
+  ).catch(error => {
+    throw new Error(error.response.data.message);
+  });
 }

@@ -14,8 +14,8 @@ const campos = [
   { nome: 'id', tipo: 'text', label: 'id', placeholder: 'ID', required: false, readOnly: true },
   { nome: 'marcaId', tipo: 'select', label: 'Marca', placeholder: '', required: true },
   { nome: 'modelo', tipo: 'text', label: 'Modelo', placeholder: 'modelo do veículo', required: true },
-  { nome: 'valor', tipo: 'text', label: 'Valor', required: true },
-  { nome: 'ano', tipo: 'text', label: 'Ano', placeholder: 'Ano do Veículo', required: true },
+  { nome: 'ano', tipo: 'number', label: 'Ano', placeholder: 'Ano do Veículo', required: true },
+  { nome: 'valor', tipo: 'number', label: 'Valor', required: true },
 ];
 
 export default function CadastroVeiculo() {
@@ -70,20 +70,20 @@ export default function CadastroVeiculo() {
     try {
       if (!veiculo.id) {
         await cadastrarVeiculo(veiculo);
-        alert('Veículo cadastrado!');
+        alert('Veículo cadastrado com sucesso!');
       }
       else{
         await modificarVeiculo(veiculo);
-        alert('Veículo modificado!');
+        alert('Veículo modificado com sucesso!');
       }
 
       limparForm();
 
       navegar('/veiculos');
     } catch (err) {
-      alert('Erro ao cadastrar veículo');
+      alert('Erro ao salvar veículo: ' + (err as Error).message);
     }
-  };
+  }; 
 
   const limparForm = () => {
     setVeiculo({ 
@@ -101,7 +101,8 @@ export default function CadastroVeiculo() {
       valores={veiculo}
       setValores={setVeiculo}
       onSubmit={handleSubmit}
-      tituloBotao="Cadastrar Veículo"
+      tituloBotao="Salvar"
+      tituloForm={(veiculo.id === '' ? 'Incluir' : 'Editar') + ' Veículo'}
     />
   );
 

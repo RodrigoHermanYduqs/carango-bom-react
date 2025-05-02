@@ -33,6 +33,7 @@ export default function CadastroUsuario() {
       setValores={setUsuario}
       onSubmit={handleSubmit}
       tituloBotao="Cadastrar Usuário"
+      tituloForm={(usuario.email === '' ? 'Incluir' : 'Editar') + ' Usuário'}
     />
   );
 }

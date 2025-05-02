@@ -13,10 +13,6 @@ export default function App() {
     <Router>
       <div className='App'>
         <Menu />
-        <div>
-          <h1>Bem-vindo(a) à nossa Loja Carango Bom!</h1>
-          <p>Gerencie Veículos e Marcas de forma simples e eficiente.</p>
-        </div>
         <Routes>
           <Route path='/' element={<Autenticacao />} />
 

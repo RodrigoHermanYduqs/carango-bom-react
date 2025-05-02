@@ -41,6 +41,7 @@ export default function Autenticacao() {
       setValores={setAutenticacao}
       onSubmit={handleSubmit}
       tituloBotao="Entrar"
+      tituloForm='Fazer Login'
     />
   );
 }

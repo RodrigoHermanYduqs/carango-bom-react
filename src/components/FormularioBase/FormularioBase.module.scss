@@ -51,6 +51,18 @@
           background-color: #5b6f85;
         }
       }
+
+      select {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        background-color: #4c5a73;
+        border: 1px solid #4f5c6a;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #fff;
+        transition: all 0.3s ease;
+      }
     }
   
     .inputContainer:last-of-type {

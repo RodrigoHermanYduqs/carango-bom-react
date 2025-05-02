@@ -14,9 +14,6 @@ export default function Menu() {
   return (
     <nav className={styles.menu}>
       <ul>
-        <li>
-          <Link to="/">Novo Login</Link>
-        </li>
         {estaAutenticado && (
           <>
             <li>

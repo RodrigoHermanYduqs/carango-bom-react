@@ -7,10 +7,11 @@ import { marcaAtom } from '../../atoms/marcaAtom';
 import { Marca } from '../../types/marca.type';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getByPlaceholderText } from '@testing-library/dom';
+import { AxiosError } from 'axios';
 
 const campos = [
   { nome: 'id', tipo: 'text', label: 'id', placeholder: 'ID', required: false, readOnly: true },
-  { nome: 'nome', tipo: 'text', label: 'Nome', placeholder: 'Digite a Marca', required: true },
+  { nome: 'nome', tipo: 'text', label: 'Nome', placeholder: 'Digite a Marca', required: true, maxLength: 50 },
 ];
 
 export default function CadastroMarca() {
@@ -49,18 +50,18 @@ export default function CadastroMarca() {
     try {
       if (!marca.id) {
         await cadastrarMarca(marca);
-        alert('Marca cadastrada!');
+        alert('Marca cadastrada com sucesso!');
       }
       else {
         await modificarMarca(marca);
-        alert('Marca atualizada!');
+        alert('Marca atualizada com sucesso!');
       }
 
       limparForm();
 
       navegar('/marcas');
     } catch (err) {
-      alert('Erro ao cadastrar marca');
+      alert('Erro ao salvar marca: ' + (err as Error).message);
     }
   };
 
@@ -77,7 +78,8 @@ export default function CadastroMarca() {
       valores={marca}
       setValores={setMarca}
       onSubmit={handleSubmit}
-      tituloBotao="Cadastrar Marcas"
+      tituloBotao="Salvar"
+      tituloForm={(marca.id === '' ? 'Incluir' : 'Editar') + ' Marca'}
     />
   );
 }

@@ -6,11 +6,14 @@ import { excluirVeiculo, listarVeiculos } from '../../services/veiculo.service';
 import { Veiculo } from '../../types/veiculo.type';
 import { listaMarcaAtom } from '../../atoms/listaMarcaAtom';
 import { listarMarcas } from '../../services/marca.service';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { formatarMoeda } from '../../utils/formataMoeda';
 
 export default function ListaVeiculos() {
   const [veiculos, setVeiculos] = useRecoilState(listaVeiculoAtom);
   const [marcas, setMarcas] = useRecoilState(listaMarcaAtom);
+
+  const navEditar = useNavigate();
 
   useEffect(() => {
     async function carregarVeiculos() {
@@ -39,13 +42,18 @@ export default function ListaVeiculos() {
   }, [setVeiculos, setMarcas]);
 
   async function excluir(veiculoExcluido: Veiculo) {
+
+    if (!confirm('Deseja realmente excluir este Veículo?'))
+      return;
+
     try {
       const response = await excluirVeiculo(veiculoExcluido);
+      alert('Veículo excluído com sucesso!');
       const listaVeiculos = veiculos.filter(veiculos => veiculos.id !== veiculoExcluido.id);
       setVeiculos([...listaVeiculos]);
     }
     catch (err) {
-      alert('Erro ao excluir veiculo');
+      alert('Erro ao excluir veiculo: ' + (err as Error).message);
     }
   }
 
@@ -55,40 +63,41 @@ export default function ListaVeiculos() {
   }
 
   return (
-    <div className={style.listaVeiculos}>
+    <>
       <h1>Lista de Veiculos</h1>
-      {veiculos.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Marca</th>
-              <th>Modelo</th>
-              <th>Ano</th>
-              <th>Valor</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {veiculos.map((veiculos: any) => (
-              <tr key={veiculos.id}>
-                <td style={{ textAlign: 'left', width: '40%' }}>
-                  <Link className='App-link' to={`/veiculos/cadastro/${veiculos.id}`}>{veiculos.id}</Link>
-                </td>
-                <td>{buscarNomeMarca(veiculos.marcaId)}</td>
-                <td>{veiculos.modelo}</td>
-                <td>{veiculos.ano}</td>
-                <td>{veiculos.valor}</td>
-                <td>
-                  <button className='botao' onClick={() => excluir(veiculos)}>{'< Excluir >'}</button>
-                </td>
+      <div className={style.listaVeiculos}>
+        {veiculos.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Valor</th>
+                <th colSpan={2} style={{ textAlign: 'center'}}>Ações</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p className={style.emptyState}>Nenhuma veiculo cadastrado.</p>
-      )}
-    </div>
+            </thead>
+            <tbody>
+              {veiculos.map((veiculos: any) => (
+                <tr key={veiculos.id}>
+                  <td>{buscarNomeMarca(veiculos.marcaId)}</td>
+                  <td>{veiculos.modelo}</td>
+                  <td>{veiculos.ano}</td>
+                  <td>{formatarMoeda(veiculos.valor)}</td>
+                  <td style={{ textAlign: 'center', width: '20%' }}>
+                    <button className='botao' onClick={() => navEditar(`/veiculos/cadastro/${veiculos.id}`)}>{'Alterar'}</button>
+                  </td>
+                  <td style={{ textAlign: 'center', width: '20%' }}>
+                    <button className='botao' onClick={() => excluir(veiculos)}>{'Excluir'}</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className={style.emptyState}>Nenhuma veiculo cadastrado.</p>
+        )}
+      </div>
+    </>
   );
 }

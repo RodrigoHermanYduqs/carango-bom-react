@@ -33,6 +33,8 @@ export async function cadastrarVeiculo(veiculo: Veiculo): Promise<void> {
     headers: {
       Authorization: `Bearer ${getTokenAcesso()}`
     }
+  }).catch(error => {
+    throw new Error(error.response.data.message);
   });
 }
 
@@ -47,6 +49,8 @@ export async function modificarVeiculo(veiculo: Veiculo): Promise<void> {
     headers: {
       Authorization: `Bearer ${getTokenAcesso()}`
     }
+  }).catch(error => {
+    throw new Error(error.response.data.message);
   });
 }
 
@@ -57,5 +61,7 @@ export async function excluirVeiculo(veiculoExcluido: Veiculo): Promise<void> {
         Authorization: `Bearer ${getTokenAcesso()}`
       }
     }
-  );
+  ).catch(error => {
+    throw new Error(error.response.data.message);
+  });
 }

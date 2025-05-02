@@ -5,6 +5,7 @@ export type CampoFormulario<T> = {
     placeholder?: string;
     required?: boolean;
     readOnly?: boolean;
+    maxLength?: number;
   };
   
 export type PropsFormulario<T> = {
@@ -13,5 +14,6 @@ export type PropsFormulario<T> = {
     setValores: React.Dispatch<React.SetStateAction<T>>;
     onSubmit: (evento: React.FormEvent<HTMLElement>) => void;
     tituloBotao?: string;
+    tituloForm: string;
   };
   
